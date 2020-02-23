@@ -33,10 +33,10 @@ nnoremap <BS> i<BS><Esc><Right>
 nnoremap <Space> i<Space><Esc><Right>
 nnoremap <End> <End><Right>
 
-inoremap <C-c> <Esc><Right><C-c>a
-inoremap <C-v> <Esc><Right><C-v>a
-inoremap <C-d> <Esc><C-d>a
-inoremap <C-x> <C-d>
+inoremap <C-c> <Esc><C-g>yya
+inoremap <C-v> <Esc><Right><C-g>gPi
+inoremap <C-d> <Esc><C-g>ddi
+inoremap <C-x> <Esc><C-g>ddi
 "imap <S-CR> $<CR>
-inoremap <C-s> <Esc><C-s>
-inoremap <C-w> <Esc><C-x>a
+inoremap <C-s> <Esc>:w<CR>
+inoremap <C-w> <Esc>:q<CR>a
