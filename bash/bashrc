@@ -126,7 +126,6 @@ export DISPLAY=:0
 alias e="eclipse/eclipse & logout"
 
 # Reading & writing dotfile changes
-alias upd8="cd ~/.dotfiles && git pull && ./install.sh"
-alias sav8="cd ~/.dotfiles && git add . && git commit -m \"$(echo "Update `date`")\" && ./install.sh"
+alias upd8="(cd ~/.dotfiles && git pull && ./install.sh)"
 
 source .bashrc2 # Machine-specific configuration
