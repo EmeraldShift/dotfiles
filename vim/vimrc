@@ -3,28 +3,40 @@ set incsearch
 set autoindent
 set clipboard=unnamedplus
 set virtualedit=onemore
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
+
+" I am a Windows goon. I like my standard keybindings. A *LOT*.
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
-smap <Del> <C-g>"_d
-smap <C-x> <Del>
-smap <C-c> <C-g>y
-smap <C-v> <C-g>gP
-smap <Tab> <C-g>1> 
-smap <S-Tab> <C-g>1<
-smap <C-s> <Esc><C-s>
+snoremap <Del> <C-g>"_d
+snoremap <C-x> <Del>
 
-nmap <C-c> <C-g>yy
-nmap <C-v> <C-g>gP
-nmap <C-d> <C-g>dd
-nmap <Tab> V1><Esc>
-nmap <S-Tab> V1<<Esc>
+snoremap <C-c> <C-g>y
+snoremap <C-v> <C-g>gP
+snoremap <Tab> <C-g>1>
+snoremap <S-Tab> <C-g>1<
+snoremap <C-s> <Esc><C-s>
+
+nnoremap <C-c> <C-g>yy
+nnoremap <C-v> <C-g>gP
+nnoremap <C-d> <C-g>dd
+nnoremap <Tab> V1><Esc>
+nnoremap <S-Tab> V1<<Esc>
 "nmap <S-CR> i<S-CR><Esc>
-nmap <C-s> :w<CR>
+nnoremap <C-s> :w<CR>
+nnoremap <C-x> :q<CR>
+nnoremap <CR> i<CR><Esc>
+nnoremap <BS> i<BS><Esc><Right>
+nnoremap <Space> i<Space><Esc><Right>
+nnoremap <End> <End><Right>
 
-imap <C-c> <Esc><C-c>a
-imap <C-v> <Esc><C-v>a
-imap <C-d> <Esc><C-d>a
-imap <C-x> <C-d>
+inoremap <C-c> <Esc><Right><C-c>a
+inoremap <C-v> <Esc><Right><C-v>a
+inoremap <C-d> <Esc><C-d>a
+inoremap <C-x> <C-d>
 "imap <S-CR> $<CR>
-imap <C-s> <Esc><C-s>i
+inoremap <C-s> <Esc><C-s>
+inoremap <C-w> <Esc><C-x>a
