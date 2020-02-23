@@ -1,22 +1,30 @@
 set whichwrap+=<,>,h,l,[,]
 set incsearch
 set autoindent
-
 set clipboard=unnamedplus
+set virtualedit=onemore
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
-imap <C-c> <Esc><C-c>i
-imap <C-v> <Esc><C-v>i
-imap <C-d> <Esc><C-d>i
-
 smap <Del> <C-g>"_d
+smap <C-x> <Del>
 smap <C-c> <C-g>y
 smap <C-v> <C-g>gP
 smap <Tab> <C-g>1> 
 smap <S-Tab> <C-g>1<
+smap <C-s> <Esc><C-s>
 
 nmap <C-c> <C-g>yy
 nmap <C-v> <C-g>gP
 nmap <C-d> <C-g>dd
+nmap <Tab> V1><Esc>
+nmap <S-Tab> V1<<Esc>
+"nmap <S-CR> i<S-CR><Esc>
+nmap <C-s> :w<CR>
 
+imap <C-c> <Esc><C-c>a
+imap <C-v> <Esc><C-v>a
+imap <C-d> <Esc><C-d>a
+imap <C-x> <C-d>
+"imap <S-CR> $<CR>
+imap <C-s> <Esc><C-s>i

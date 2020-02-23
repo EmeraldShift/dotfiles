@@ -124,6 +124,7 @@ fi
 
 export DISPLAY=:0
 alias e="eclipse/eclipse & logout"
+alias vim="stty stop '' -ixoff; vim"
 
 # Reading & writing dotfile changes
 alias upd8="(cd ~/.dotfiles && git pull && ./install.sh)"
