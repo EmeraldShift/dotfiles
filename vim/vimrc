@@ -1,0 +1,22 @@
+set whichwrap+=<,>,h,l,[,]
+set incsearch
+set autoindent
+
+set clipboard=unnamedplus
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+imap <C-c> <Esc><C-c>i
+imap <C-v> <Esc><C-v>i
+imap <C-d> <Esc><C-d>i
+
+smap <Del> <C-g>"_d
+smap <C-c> <C-g>y
+smap <C-v> <C-g>gP
+smap <Tab> <C-g>1> 
+smap <S-Tab> <C-g>1<
+
+nmap <C-c> <C-g>yy
+nmap <C-v> <C-g>gP
+nmap <C-d> <C-g>dd
+
