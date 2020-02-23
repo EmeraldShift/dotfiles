@@ -3,6 +3,7 @@ set incsearch
 set autoindent
 set clipboard=unnamedplus
 set virtualedit=onemore
+set hidden
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
@@ -22,7 +23,7 @@ snoremap <C-s> <Esc><C-s>
 
 nnoremap <C-c> <C-g>yy
 nnoremap <C-v> <C-g>gP
-nnoremap <C-d> <C-g>dd
+nnoremap <C-d> <C-g>"_dd
 nnoremap <Tab> V1><Esc>
 nnoremap <S-Tab> V1<<Esc>
 "nmap <S-CR> i<S-CR><Esc>
@@ -32,11 +33,20 @@ nnoremap <CR> i<CR><Esc>
 nnoremap <BS> i<BS><Esc><Right>
 nnoremap <Space> i<Space><Esc><Right>
 nnoremap <End> <End><Right>
+nnoremap <C-w> :bd<CR>
+nnoremap <C-e> :bn<CR>
+execute "set <M-,>=\e,"
+nnoremap <M-,> :bp<CR>
+execute "set <M-.>=\e."
+nnoremap <M-.> :bn<CR>
 
 inoremap <C-c> <Esc><C-g>yya
 inoremap <C-v> <Esc><Right><C-g>gPi
-inoremap <C-d> <Esc><C-g>ddi
+inoremap <C-d> <Esc><C-g>"_ddi
 inoremap <C-x> <Esc><C-g>ddi
 "imap <S-CR> $<CR>
-inoremap <C-s> <Esc>:w<CR>
-inoremap <C-w> <Esc>:q<CR>a
+inoremap <C-s> <Esc><Right>:w<CR>
+inoremap <C-e> <C-o>:bn<CR>
+inoremap <C-w> <C-o>:bd<CR>
+inoremap <M-,> <C-o>:bp<CR>
+inoremap <M-.> <C-o>:bn<CR>
