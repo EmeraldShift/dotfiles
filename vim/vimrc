@@ -59,6 +59,7 @@ inoremap <C-d> <Esc><C-g>"_ddi
 inoremap <C-x> <Esc><C-g>ddi
 inoremap <S-Tab> <Esc>V1<<Esc>i
 inoremap <C-s> <Esc><Right>:w<CR>
+inoremap <C-q> <Esc>:q!<CR>
 inoremap <C-e> <C-o>:bn<CR>
 inoremap <C-w> <C-o>:bd<CR>
 inoremap <M-,> <C-o>:bp<CR>
