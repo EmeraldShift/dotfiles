@@ -127,6 +127,8 @@ alias e="eclipse/eclipse & logout"
 alias vim="stty stop '' -ixoff; vim"
 alias bashrc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
+alias tmconf="vim ~/.tmux.conf"
+alias tmconfl="vim ~/.tmux.conf.local"
 
 # Reading & writing dotfile changes
 alias upd8="(cd ~/.dotfiles && git stash && git pull && ./install.sh)"
