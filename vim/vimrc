@@ -16,17 +16,25 @@ snoremap <Del> <C-g>"_d
 snoremap <C-x> <Del>
 
 snoremap <C-c> <C-g>y
-snoremap <C-v> <C-g>gP
+snoremap <C-v> <C-g>gp
 snoremap <Tab> <C-g>1>
 snoremap <S-Tab> <C-g>1<
 snoremap <C-s> <Esc><C-s>
+
+map <ESC>[5A <C-Up>
+map <ESC>[5B <C-Down>
+map <ESC>[5C <C-Right>
+map <ESC>[5D <C-Left>
+map! <ESC>[5A <C-Up>
+map! <ESC>[5B <C-Down>
+map! <ESC>[5C <C-Right>
+map! <ESC>[5D <C-Left>
 
 nnoremap <C-c> <C-g>yy
 nnoremap <C-v> <C-g>gP
 nnoremap <C-d> <C-g>"_dd
 nnoremap <Tab> V1><Esc>
 nnoremap <S-Tab> V1<<Esc>
-"nmap <S-CR> i<S-CR><Esc>
 nnoremap <C-s> :w<CR>
 nnoremap <C-x> :q<CR>
 nnoremap <CR> i<CR><Esc>
@@ -39,14 +47,20 @@ execute "set <M-,>=\e,"
 nnoremap <M-,> :bp<CR>
 execute "set <M-.>=\e."
 nnoremap <M-.> :bn<CR>
+nnoremap <C-Up> {
+nnoremap <C-Down> }
+nnoremap <C-Left> b<Left>
+nnoremap <C-Right> e<Right>
 
-inoremap <C-c> <Esc><C-g>yya
+inoremap <C-c> <Esc><C-g>yyi
 inoremap <C-v> <Esc><Right><C-g>gPi
 inoremap <C-d> <Esc><C-g>"_ddi
 inoremap <C-x> <Esc><C-g>ddi
-"imap <S-CR> $<CR>
+inoremap <S-Tab> <Esc>V1<<Esc>i
 inoremap <C-s> <Esc><Right>:w<CR>
 inoremap <C-e> <C-o>:bn<CR>
 inoremap <C-w> <C-o>:bd<CR>
 inoremap <M-,> <C-o>:bp<CR>
 inoremap <M-.> <C-o>:bn<CR>
+inoremap <C-Up> <C-o>{
+inoremap <C-Down> <C-o>}
