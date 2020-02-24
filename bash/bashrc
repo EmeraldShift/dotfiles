@@ -124,7 +124,7 @@ fi
 
 export DISPLAY=:0
 alias e="eclipse/eclipse & logout"
-alias vim="stty stop '' -ixoff; vim"
+alias vim="stty stop '' -ixon -ixoff; vim"
 alias bashrc="vim ~/.bashrc && source ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 alias tmconf="vim ~/.tmux.conf"
