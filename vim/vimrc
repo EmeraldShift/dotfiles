@@ -1,16 +1,53 @@
+call plug#begin('~/.vim/plugged')
+Plug 'vim-syntastic/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ycm-core/YouCompleteMe'
+"Plug 'itchyny/lightline.vim'
+call plug#end()
+
+" Plugin configuration
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='wombat'
+
+" Newbie Syntastic settings (recommended from repo)
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+set autoindent
+set number
 set whichwrap+=<,>,h,l,[,]
 set incsearch
-set autoindent
 set clipboard=unnamedplus
 set virtualedit=onemore
 set hidden
 set exrc
 set secure
 set colorcolumn=110
-highlight ColorColumn ctermbg=darkgray
+set laststatus=2
+set splitbelow
+set splitright
 
+highlight ColorColumn ctermbg=darkgray
 highlight ExtraWhitespace ctermbg=red guibg=red
-:match ExtraWhitespace /\s\+$/
+match ExtraWhitespace /\s\+$/
+
+" Jump to last position
+if has("autocmd")
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Strip trailing whitespace on write
+autocmd BufWritePre * :%s/\s\+$//e
+
 
 " I am a Windows goon. I like my standard keybindings. A *LOT*.
 source $VIMRUNTIME/mswin.vim
@@ -25,44 +62,43 @@ snoremap <Tab> <C-g>1>
 snoremap <S-Tab> <C-g>1<
 snoremap <C-s> <Esc><C-s>
 
-map <ESC>[5A <C-Up>
-map <ESC>[5B <C-Down>
-map <ESC>[5C <C-Right>
-map <ESC>[5D <C-Left>
-map! <ESC>[5A <C-Up>
-map! <ESC>[5B <C-Down>
-map! <ESC>[5C <C-Right>
-map! <ESC>[5D <C-Left>
+map <Esc>[5A <C-Up>
+map <Esc>[5B <C-Down>
+map <Esc>[5C <C-Right>
+map <Esc>[5D <C-Left>
+map! <Esc>[5A <C-Up>
+map! <Esc>[5B <C-Down>
+map! <Esc>[5C <C-Right>
+map! <Esc>[5D <C-Left>
 
 nnoremap <C-c> <C-g>yy
 nnoremap <C-v> <C-g>gP
-nnoremap <C-d> <C-g>"_dd
+nnoremap <C-d> <C-g>dd
 nnoremap <Tab> V1><Esc>
 nnoremap <S-Tab> V1<<Esc>
 nnoremap <C-s> :w<CR>
 nnoremap <C-x> :q<CR>
 nnoremap <C-q> :q!<CR>
 nnoremap <CR> i<CR><Esc>
-nnoremap <BS> i<BS><Esc><Right>
-nnoremap <Space> i<Space><Esc><Right>
+nnoremap <BS> i<BS><Esc>`^
+nnoremap <Space> i<Space><Esc>`^
 nnoremap <End> <End><Right>
 nnoremap <C-w> :bd<CR>
 nnoremap <C-e> :bn<CR>
 execute "set <M-,>=\e,"
 nnoremap <M-,> :bp<CR>
-execute "set <M-.>=\e."
 nnoremap <M-.> :bn<CR>
 nnoremap <C-Up> {
 nnoremap <C-Down> }
 nnoremap <C-Left> b<Left>
 nnoremap <C-Right> e<Right>
 
-inoremap <C-c> <Esc><C-g>yyi
-inoremap <C-v> <Esc><Right><C-g>gPi
-inoremap <C-d> <Esc><C-g>"_ddi
-inoremap <C-x> <Esc><C-g>ddi
-inoremap <S-Tab> <Esc>V1<<Esc>i
-inoremap <C-s> <Esc><Right>:w<CR>
+inoremap <C-c> <Esc>`^<C-g>yyi
+inoremap <C-v> <Esc>`^gPi
+inoremap <C-d> <Esc>`^<C-g>"_ddi
+inoremap <C-x> <Esc>`^<C-g>ddi
+inoremap <S-Tab> <Esc>`^V1<<Esc>i
+inoremap <C-s> <Esc>`^:w<CR>
 inoremap <C-q> <Esc>:q!<CR>
 inoremap <C-e> <C-o>:bn<CR>
 inoremap <C-w> <C-o>:bd<CR>
