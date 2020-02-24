@@ -4,6 +4,10 @@ set autoindent
 set clipboard=unnamedplus
 set virtualedit=onemore
 set hidden
+set exrc
+set secure
+set colorcolumn=110
+highlight ColorColumn ctermbg=darkgray
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
