@@ -8,6 +8,6 @@ ln -s -f ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s -f ~/.dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
 ln -s -f ~/.dotfiles/vim/vimrc ~/.vimrc
 ln -s -f ~/.dotfiles/vim ~/.vim
-vim +PlugInstall
+vim +PlugInstall +qall
 
 echo 'Dotfiles installed.'
