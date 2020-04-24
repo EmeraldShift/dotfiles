@@ -1,8 +1,7 @@
 call plug#begin('~/.vim/plugged')
-Plug 'vim-syntastic/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ycm-core/YouCompleteMe'
+"Plug 'ycm-core/YouCompleteMe'
 "Plug 'itchyny/lightline.vim'
 call plug#end()
 
@@ -11,16 +10,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='wombat'
-
-" Newbie Syntastic settings (recommended from repo)
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 set autoindent
 set number
@@ -35,6 +24,9 @@ set colorcolumn=110
 set laststatus=2
 set splitbelow
 set splitright
+if has('mouse')
+	set mouse=a
+endif
 
 highlight ColorColumn ctermbg=darkgray
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -48,6 +40,23 @@ endif
 " Strip trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
 
+" I want <C-x> to close buffers, not windows. But the last buffer I close will
+" leave an empty window that I then have to manually close. This fixes that.
+function! CountListedBuffers()
+	let cnt = 0
+	for nr in range(1,bufnr("$"))
+		if buflisted(nr) && ! empty(bufname(nr)) || getbufvar(nr, '&buftype') ==# 'help'
+			let cnt += 1
+		endif
+	endfor
+	return cnt
+endfunction
+function! QuitIfLastBuffer()
+	if CountListedBuffers() == 1
+		:q
+	endif
+endfunction
+autocmd BufDelete * :call QuitIfLastBuffer()
 
 " I am a Windows goon. I like my standard keybindings. A *LOT*.
 source $VIMRUNTIME/mswin.vim
@@ -77,13 +86,12 @@ nnoremap <C-d> <C-g>dd
 nnoremap <Tab> V1><Esc>
 nnoremap <S-Tab> V1<<Esc>
 nnoremap <C-s> :w<CR>
-nnoremap <C-x> :q<CR>
+nnoremap <C-x> :bd<CR>
 nnoremap <C-q> :q!<CR>
 nnoremap <CR> i<CR><Esc>
 nnoremap <BS> i<BS><Esc>`^
 nnoremap <Space> i<Space><Esc>`^
 nnoremap <End> <End><Right>
-nnoremap <C-w> :bd<CR>
 nnoremap <C-e> :bn<CR>
 execute "set <M-,>=\e,"
 nnoremap <M-,> :bp<CR>
@@ -101,7 +109,6 @@ inoremap <S-Tab> <Esc>`^V1<<Esc>i
 inoremap <C-s> <Esc>`^:w<CR>
 inoremap <C-q> <Esc>:q!<CR>
 inoremap <C-e> <C-o>:bn<CR>
-inoremap <C-w> <C-o>:bd<CR>
 inoremap <M-,> <C-o>:bp<CR>
 inoremap <M-.> <C-o>:bn<CR>
 inoremap <C-Up> <C-o>{
