@@ -130,6 +130,6 @@ alias tmconf="vim ~/.tmux.conf"
 alias tmconfl="vim ~/.tmux.conf.local"
 
 # Reading & writing dotfile changes
-alias upd8="(cd ~/.dotfiles && git stash && git pull && ./install.sh)"
+alias upd8="(cd ~/.dotfiles && git stash -u && git pull && ./install.sh)"
 
 [ -f .bashrc2 ] && source .bashrc2 # Machine-specific configuration
