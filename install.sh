@@ -8,9 +8,6 @@ ln -s -f ~/.dotfiles/bash/bash_aliases ~/.bash_aliases
 ### Instead, manually add the call to .bashrc at the end of it.
 ### ln -s -f ~/.dotfiles/bash/bash_profile ~/.bash_profile
 
-# nano
-ln -s -f ~/.dotfiles/nano/nanorc ~/.nanorc
-
 # tmux
 ln -s -f ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s -f ~/.dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
