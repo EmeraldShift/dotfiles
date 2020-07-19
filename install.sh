@@ -1,6 +1,7 @@
 set -euo pipefail
 
 ln -s -f ~/.dotfiles/bash/bashrc ~/.bashrc
+ln -s -f ~/.dotfiles/bash/bash_aliases ~/.bash_aliases
 . ~/.bash_profile
 
 ### Don't override profile, it usually has important stuff in it.

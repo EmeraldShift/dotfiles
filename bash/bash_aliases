@@ -1,0 +1,8 @@
+alias vim="stty stop '' -ixon -ixoff; vim"
+alias bashrc="vim ~/.bashrc && source ~/.bashrc"
+alias vimrc="vim ~/.vimrc"
+alias vimpl="vim +PlugInstall +qall"
+alias tmconf="vim ~/.tmux.conf"
+alias tmconfl="vim ~/.tmux.conf.local"
+
+[ -f .bash_aliases2 ] && source .bash_aliases2 # Machine-specific configuration
