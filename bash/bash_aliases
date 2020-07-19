@@ -1,5 +1,5 @@
 alias vim="stty stop '' -ixon -ixoff; vim"
-alias bashrc="vim ~/.bashrc && source ~/.bashrc"
+alias bashrc="pushd .; vim ~/.bashrc && source ~/.bashrc; popd;"
 alias vimrc="vim ~/.vimrc"
 alias vimpl="vim +PlugInstall +qall"
 alias tmconf="vim ~/.tmux.conf"
