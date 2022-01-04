@@ -2,11 +2,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'ycm-core/YouCompleteMe'
-"Plug 'itchyny/lightline.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'chriskempson/base16-vim'
+
 call plug#end()
 
 " Plugin configuration
@@ -32,9 +29,17 @@ if has('mouse')
 	set mouse=a
 endif
 
+" GUI settings
+
 highlight ColorColumn ctermbg=darkgray
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+set background=dark
+let base16colorspace=256
+colorscheme base16-tomorrow-night
+syntax on
+hi Normal ctermbg=NONE
+set termguicolors
 
 " Jump to last position
 if has("autocmd")
@@ -70,7 +75,7 @@ snoremap <Del> <C-g>"_d
 snoremap <C-x> <Del>
 
 snoremap <C-c> <C-g>y
-snoremap <C-v> <C-g>gp
+snoremap <C-v> <C-g>"_dgP
 snoremap <Tab> <C-g>1>
 snoremap <S-Tab> <C-g>1<
 snoremap <C-s> <Esc><C-s>
