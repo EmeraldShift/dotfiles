@@ -117,6 +117,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Fix C-s in some cases
+stty ixon
+
 # Reading & writing dotfile changes
 alias upd8="(cd ~/.dotfiles && git stash -u && git pull && ./install.sh)"
 
