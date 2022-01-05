@@ -1,16 +1,70 @@
 call plug#begin('~/.vim/plugged')
+" Plug 'ycm-core/YouCompleteMe'
+
+" GUI enhancements
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'ycm-core/YouCompleteMe'
+Plug 'andymass/vim-matchup'
 Plug 'chriskempson/base16-vim'
+
+" Fuzzy finder
+Plug 'airblade/vim-rooter'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
-" Plugin configuration
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='wombat'
+" Some leader shortcuts
+let mapleader = "\<Space>"
+
+" from http:/sheerun.net/2014/03/21/how-to-boost-your-vim-productivity
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
+if executable('rg')
+  set grepprg=rg\ --no-heading\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+endif
+
+" Open hotkeys
+map <C-p> :Files<CR>
+map <leader>; :Buffers<CR>
+
+" Quick-save
+nmap <leader>w :w<CR>
+
+" <leader>s for Rg serach
+noremap <leader>s :Rg<CR>
+let g:fzf_layout = {'down': '~20%'}
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+function! s:list_cmd()
+  let base = fnamemodify(expand('%'), ':h:.:S')
+  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow', shellescape(expand('%')))
+endfunction
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
+  \                               'options': '--tiebreak=index'}, <bang>0)
+
+" Open new file adjacent to current file
+nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Better completion
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+" Better display for messages
+set cmdheight=2
+" You will have bad experience for diagnostic mesages when it's deafult 4000.
+set updatetime=300
 
 set autoindent
 set number
@@ -28,18 +82,32 @@ set splitright
 if has('mouse')
 	set mouse=a
 endif
+set showtabline=1
 
 " GUI settings
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='tomorrow'
 
 highlight ColorColumn ctermbg=darkgray
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+
+" 256 colors
+if !has('gui_running')
+  set t_C0=256
+endif
+if (match($TERM, "-256color") != -1) && (match($TERM, "screen-256color") == -1)
+  " screen does not (yet) support truecolor
+  set termguicolors " This is disabled because I think the colors are kinda yucky
+endif
 set background=dark
 let base16colorspace=256
 colorscheme base16-tomorrow-night
 syntax on
 hi Normal ctermbg=NONE
-set termguicolors
 
 " Jump to last position
 if has("autocmd")
@@ -65,7 +133,57 @@ function! QuitIfLastBuffer()
 		:q
 	endif
 endfunction
-autocmd BufDelete * :call QuitIfLastBuffer()
+" autocmd BufDelete * :call QuitIfLastBuffer()
+
+" Editor settings
+filetype plugin indent on
+set autoindent
+set timeoutlen=300
+set encoding=utf-8
+set scrolloff=2
+set noshowmode
+set hidden
+set nowrap
+set nojoinspaces
+set printfont=:h10
+set printoptions=paper:letter
+" Always draw sign column. Prevent buffer moving when adding/deleting sign.
+set signcolumn=yes
+
+" Permanent undo
+set undodir=~/.vimdid
+set undofile
+
+" Decent wildmenu
+set wildmenu
+set wildmode=list:longest
+set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+
+" Wrapping options
+set formatoptions=tc " wrap text and comments using textwidth
+set formatoptions+=r " continue comments when pressing ENTER in I mode
+set formatoptions+=q " enable formatting of comments with gq
+set formatoptions+=n " detect lists for formatting
+set formatoptions+=b " auto-wrap in insert mode, and do not wrap old long lines
+
+" Proper search
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+set nohlsearch
+
+" Search results centered please
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+
+" More GUI settings
+set guioptions-=T " remove toolbar
+set vb t_vb= " no more beeps
+set ttyfast
 
 " I am a Windows goon. I like my standard keybindings. A *LOT*.
 source $VIMRUNTIME/mswin.vim
@@ -79,11 +197,8 @@ snoremap <C-v> <C-g>"_dgP
 snoremap <Tab> <C-g>1>
 snoremap <S-Tab> <C-g>1<
 snoremap <C-s> <Esc><C-s>
+snoremap <C-d> <C-g>"_D
 
-map <Esc>[5A <C-Up>
-map <Esc>[5B <C-Down>
-map <Esc>[5C <C-Right>
-map <Esc>[5D <C-Left>
 map! <Esc>[5A <C-Up>
 map! <Esc>[5B <C-Down>
 map! <Esc>[5C <C-Right>
@@ -96,7 +211,7 @@ nnoremap <Tab> V1><Esc>
 nnoremap <S-Tab> V1<<Esc>
 nnoremap <C-s> :w<CR>
 nnoremap <C-x> :bd<CR>
-nnoremap <C-q> :q!<CR>
+nnoremap <C-Q> :q!<CR>
 nnoremap <CR> i<CR><Esc>
 nnoremap <BS> i<BS><Esc>`^
 nnoremap <Space> i<Space><Esc>`^
@@ -109,6 +224,8 @@ nnoremap <C-Up> {
 nnoremap <C-Down> }
 nnoremap <C-Left> b<Left>
 nnoremap <C-Right> e<Right>
+nnoremap <Insert> R
+nnoremap <Leader>a <C-V>
 
 inoremap <C-c> <Esc>`^<C-g>yyi
 inoremap <C-v> <Esc>`^gPi
