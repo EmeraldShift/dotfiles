@@ -12,8 +12,10 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 
-" Sneak (s + <2 chars> = goto occurrence of <2 chars>)
+" Useful utilities
 Plug 'justinmk/vim-sneak'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -179,6 +181,7 @@ set nohlsearch
 
 " No pinky needed for commands
 nnoremap ; :
+nnoremap ;; ;
 
 " Search results centered please
 nnoremap <silent> n nzz
