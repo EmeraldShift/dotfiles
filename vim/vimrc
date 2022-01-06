@@ -12,6 +12,9 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 
+" Sneak (s + <2 chars> = goto occurrence of <2 chars>)
+Plug 'justinmk/vim-sneak'
+
 call plug#end()
 
 " Some leader shortcuts
@@ -68,6 +71,7 @@ set updatetime=300
 
 set autoindent
 set number
+set relativenumber
 set whichwrap+=<,>,h,l,[,]
 set incsearch
 set clipboard=unnamedplus
@@ -172,6 +176,9 @@ set ignorecase
 set smartcase
 set gdefault
 set nohlsearch
+
+" No pinky needed for commands
+nnoremap ; :
 
 " Search results centered please
 nnoremap <silent> n nzz
