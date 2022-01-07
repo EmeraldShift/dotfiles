@@ -23,6 +23,9 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
 " Smart window killer
 Plug 'mhinz/vim-sayonara'
 
@@ -83,7 +86,9 @@ set completeopt=menuone,noselect,noinsert
 " Better display for messages
 set cmdheight=2
 set updatetime=300
-let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_delay = 0
+let g:lsp_semantic_enabled = 1
 
 set autoindent
 set number
@@ -190,8 +195,9 @@ nnoremap <silent> g* g*zz
 set guioptions-=T " remove toolbar
 set vb t_vb= " no more beeps
 set ttyfast
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
+
+" Rust
+let g:rustfmt_autosave = 1
 
 " I am a Windows goon. I like my standard keybindings. A *LOT*.
 source $VIMRUNTIME/mswin.vim
