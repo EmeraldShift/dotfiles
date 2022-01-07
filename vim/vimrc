@@ -17,6 +17,15 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
+" LSP
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" Smart window killer
+Plug 'mhinz/vim-sayonara'
+
 call plug#end()
 
 " Some leader shortcuts
@@ -61,15 +70,20 @@ command! -bang -nargs=? -complete=dir Files
 nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
+" Autocompletion
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>"
+
 " Better completion
-" menuone: popup even when there's only one match
+" menuone: Popup even when there's only one match
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noselect,noinsert
 " Better display for messages
 set cmdheight=2
-" You will have bad experience for diagnostic mesages when it's deafult 4000.
 set updatetime=300
+let g:lsp_diagnostics_echo_cursor = 1
 
 set autoindent
 set number
@@ -123,24 +137,6 @@ endif
 " Strip trailing whitespace on write
 autocmd BufWritePre * :%s/\s\+$//e
 
-" I want <C-x> to close buffers, not windows. But the last buffer I close will
-" leave an empty window that I then have to manually close. This fixes that.
-function! CountListedBuffers()
-	let cnt = 0
-	for nr in range(1,bufnr("$"))
-		if buflisted(nr) && ! empty(bufname(nr)) || getbufvar(nr, '&buftype') ==# 'help'
-			let cnt += 1
-		endif
-	endfor
-	return cnt
-endfunction
-function! QuitIfLastBuffer()
-	if CountListedBuffers() == 1
-		:q
-	endif
-endfunction
-" autocmd BufDelete * :call QuitIfLastBuffer()
-
 " Editor settings
 filetype plugin indent on
 set autoindent
@@ -162,7 +158,7 @@ set undofile
 
 " Decent wildmenu
 set wildmenu
-set wildmode=list:longest
+set wildmode=list,longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Wrapping options
@@ -194,6 +190,8 @@ nnoremap <silent> g* g*zz
 set guioptions-=T " remove toolbar
 set vb t_vb= " no more beeps
 set ttyfast
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
 
 " I am a Windows goon. I like my standard keybindings. A *LOT*.
 source $VIMRUNTIME/mswin.vim
@@ -220,8 +218,8 @@ nnoremap <C-d> <C-g>dd
 nnoremap <Tab> V1><Esc>
 nnoremap <S-Tab> V1<<Esc>
 nnoremap <C-s> :w<CR>
-nnoremap <C-x> :bd<CR>
-nnoremap <C-Q> :q!<CR>
+nnoremap <C-x> :Sayonara<CR>
+nnoremap <C-q> :q!<CR>
 nnoremap <CR> i<CR><Esc>
 nnoremap <BS> i<BS><Esc>`^
 nnoremap <Space> i<Space><Esc>`^
