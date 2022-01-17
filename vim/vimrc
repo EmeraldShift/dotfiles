@@ -73,6 +73,9 @@ command! -bang -nargs=? -complete=dir Files
 nnoremap <leader>o :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
+" <leader><leader> toggles between buffers
+nnoremap <leader><leader> <C-^>
+
 " Autocompletion
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -253,3 +256,7 @@ inoremap <M-,> <C-o>:bp<CR>
 inoremap <M-.> <C-o>:bn<CR>
 inoremap <C-Up> <C-o>{
 inoremap <C-Down> <C-o>}
+
+" New function syntax
+inoremap {<CR> {<CR>}<Esc>O
+inoremap {;<CR> {<CR>};<Esc>O
