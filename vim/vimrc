@@ -16,6 +16,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
 
 " LSP
 Plug 'prabirshrestha/vim-lsp'
@@ -62,7 +63,7 @@ command! -bang -nargs=* Rg
 
 function! s:list_cmd()
   let base = fnamemodify(expand('%'), ':h:.:S')
-  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow', shellescape(expand('%')))
+  return 'find -L -type f -printf "%P\n"'
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
@@ -166,7 +167,7 @@ set undofile
 
 " Decent wildmenu
 set wildmenu
-set wildmode=list,longest
+set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
 " Wrapping options
