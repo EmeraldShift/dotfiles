@@ -27,6 +27,9 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Rust
 Plug 'rust-lang/rust.vim'
 
+" LaTeX
+Plug 'lervag/vimtex'
+
 " Smart window killer
 Plug 'mhinz/vim-sayonara'
 
@@ -113,8 +116,16 @@ if has('mouse')
 endif
 set showtabline=1
 
-" GUI settings
+" Per-line motions
+map j gj
+map k gk
+map j gj
+map k gk
 
+" Fast escape
+inoremap jk <Esc>
+
+" GUI settings
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -169,6 +180,7 @@ set undofile
 set wildmenu
 set wildmode=list:longest
 set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+set wildignorecase
 
 " Wrapping options
 set formatoptions=tc " wrap text and comments using textwidth
