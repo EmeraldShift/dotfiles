@@ -9,8 +9,9 @@ ln -s -f ~/.dotfiles/bash/bash_aliases ~/.bash_aliases
 ### ln -s -f ~/.dotfiles/bash/bash_profile ~/.bash_profile
 
 # tmux
+rm -f ~/.tmux
 ln -s -f ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
-ln -s -f ~/.dotfiles/tmux/tmux.conf.local ~/.tmux.conf.local
+ln -s ~/.dotfiles/tmux ~/.tmux
 
 # vim
 rm -f ~/.vim

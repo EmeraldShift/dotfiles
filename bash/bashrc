@@ -121,4 +121,7 @@ stty ixon
 # Reading & writing dotfile changes
 alias upd8="(cd ~/.dotfiles && git stash -u && git pull && ./install.sh)"
 
+# Consistent starting cursor location
+tput cup $(tput lines) 0
+
 [ -f .bashrc2 ] && source .bashrc2 # Machine-specific configuration
